@@ -301,19 +301,19 @@ public class GameViewManager {
 		anchorPane4.setLayoutY(anchorPane4.getLayoutY()+0.5);
 		if(anchorPane1.getLayoutY()>=800) {
 			meteor_speed +=1;
-			anchorPane1.setLayoutY(-5600);
+			anchorPane1.setLayoutY(-4000);
 		}
 		if(anchorPane2.getLayoutY()>=800) {
 			meteor_speed +=2;	
-			anchorPane2.setLayoutY(-5600);
+			anchorPane2.setLayoutY(-4000);
 		}
 		if(anchorPane3.getLayoutY()>=800) {
 			meteor_speed +=2;
-			anchorPane3.setLayoutY(-5600);
+			anchorPane3.setLayoutY(-4000);
 		}
 		if(anchorPane4.getLayoutY()>=800)
 			meteor_speed +=2;
-			anchorPane4.setLayoutY(-5600);
+			anchorPane4.setLayoutY(-4000);
 	}
 	
 	private void checkIfElementCollide() {

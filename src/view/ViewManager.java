@@ -4,9 +4,6 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.scenario.effect.AbstractShadow.ShadowMode;
-import com.sun.scenario.effect.DropShadow;
-
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
