@@ -2,6 +2,7 @@ package view;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -20,6 +21,10 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import model.BlueShip;
+import model.GreenShip;
+import model.OrangeShip;
+import model.RedShip;
 import model.InfoLabel;
 import model.SHIP;
 import model.ShipPicker;
@@ -45,7 +50,7 @@ public class ViewManager {
 	private SpaceInvaderSubscene sceneToHide;
 	
 	List<SpaceInvaderButton> menuButtons;
-	
+	List<SHIP> allShips = new ArrayList<SHIP>();
 	List<ShipPicker> shipsList;
 	private SHIP chosenShip;
 	
@@ -106,9 +111,13 @@ public class ViewManager {
 	private HBox createShipToChoose() {
 		HBox hBox = new HBox();
 		hBox.setSpacing(10);
+		allShips.add(new BlueShip());
+		allShips.add(new GreenShip());
+		allShips.add(new OrangeShip());
+		allShips.add(new RedShip());
 		shipsList = new ArrayList<ShipPicker>();
 		
-		for(SHIP ship: SHIP.values()) {
+		for(SHIP ship: allShips) {
 			ShipPicker shipToPick = new ShipPicker(ship);
 			shipsList.add(shipToPick);
 			
