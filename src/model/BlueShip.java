@@ -10,7 +10,13 @@ public class BlueShip extends SHIP {
 	@Override
 	public int getHp() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 2;
+	}
+
+	@Override
+	public int getShipSpeedFactor() {
+		// TODO Auto-generated method stub
+		return 3;
 	}
 
 }

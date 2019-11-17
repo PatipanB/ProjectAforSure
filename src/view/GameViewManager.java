@@ -88,17 +88,17 @@ public class GameViewManager {
 		this.menuStage.hide();
 		createBackground();
 		createShip(choosenShip);
-		createGameLoop();
+		createGameLoop(choosenShip);
 		createGameElements(choosenShip);
 		gameStage.show();
 	}
 	
-	private void createGameLoop() {
+	private void createGameLoop(SHIP choosenship) {
 		gameTimer = new AnimationTimer() {
 			
 			@Override
 			public void handle(long now) {
-				moveShip();
+				moveShip(choosenship);
 				moveGameElement();
 				checkIfElementsAreBehindTheShipAndRelocate();
 				checkIfElementCollide();
@@ -145,7 +145,7 @@ public class GameViewManager {
 
 	
 	private void createGameElements(SHIP choosenShip) {
-		playerLife = 2;
+		playerLife = choosenShip.getHp();
 		star = new ImageView(GOLDSTAR_PATH);
 		setNewElementPosition(star);
 		gamePane.getChildren().add(star);
@@ -155,10 +155,10 @@ public class GameViewManager {
 		pointsInfoLebel.setLayoutY(20);
 		gamePane.getChildren().add(pointsInfoLebel);
 		
-		playerLifes = new ImageView[3];
+		playerLifes = new ImageView[choosenShip.getHp()+1];
 		for (int i = 0; i < playerLifes.length; i++) {
 			playerLifes[i] = new ImageView(choosenShip.getUrlLife());
-			playerLifes[i].setLayoutX(450 + (i * 50));
+			playerLifes[i].setLayoutX(550 - (i * 50));
 			playerLifes[i].setLayoutY(80);
 			gamePane.getChildren().add(playerLifes[i]);
 		}
@@ -226,15 +226,15 @@ public class GameViewManager {
 	
 
 	
-	private void moveShip() {
+	private void moveShip(SHIP choosenship) {
 		if(isUpKeyPressed && !isDownKeyPressed) {
 			if(ship.getLayoutY() > 50) {
-				ship.setLayoutY(ship.getLayoutY() -3);
+				ship.setLayoutY(ship.getLayoutY() - ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		if(!isUpKeyPressed && isDownKeyPressed) {
 			if(ship.getLayoutY() < 800 -75) {
-				ship.setLayoutY(ship.getLayoutY() +3);
+				ship.setLayoutY(ship.getLayoutY() + ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		
@@ -242,14 +242,14 @@ public class GameViewManager {
 			if(angle > -30) angle -=5;
 			ship.setRotate(angle);
 			if(ship.getLayoutX() > 0) {
-				ship.setLayoutX(ship.getLayoutX() - 3);
+				ship.setLayoutX(ship.getLayoutX() - ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		if(isRightKeyPressed && !isLeftKeyPressed) {
 			if(angle < 30) angle +=5;
 			ship.setRotate(angle);
 			if(ship.getLayoutX() <  500) {
-				ship.setLayoutX(ship.getLayoutX() + 3);
+				ship.setLayoutX(ship.getLayoutX() + ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		if(!isRightKeyPressed && !isLeftKeyPressed) {

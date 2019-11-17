@@ -10,7 +10,13 @@ public class RedShip extends SHIP {
 	@Override
 	public int getHp() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 4;
+	}
+
+	@Override
+	public int getShipSpeedFactor() {
+		// TODO Auto-generated method stub
+		return 2;
 	}
 
 }
