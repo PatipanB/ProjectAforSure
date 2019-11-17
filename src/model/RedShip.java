@@ -19,4 +19,10 @@ public class RedShip extends SHIP {
 		return 2;
 	}
 
+	@Override
+	public String getShipInfo() {
+		// TODO Auto-generated method stub
+		return "High HP\nbut slow";
+	}
+
 }

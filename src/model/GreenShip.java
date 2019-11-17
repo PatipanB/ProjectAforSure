@@ -19,4 +19,10 @@ public class GreenShip extends SHIP {
 		return 5;
 	}
 
+	@Override
+	public String getShipInfo() {
+		// TODO Auto-generated method stub
+		return "Fast but\nLow HP";
+	}
+
 }

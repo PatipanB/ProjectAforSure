@@ -19,4 +19,10 @@ public class OrangeShip extends SHIP {
 		return 2;
 	}
 
+	@Override
+	public String getShipInfo() {
+		// TODO Auto-generated method stub
+		return "Nothing good";
+	}
+
 }

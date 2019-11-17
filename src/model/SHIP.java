@@ -20,4 +20,5 @@ public abstract class SHIP {
 	
 	public abstract int getHp();
 	public abstract int getShipSpeedFactor();
+	public abstract String getShipInfo();
 }
