@@ -29,6 +29,7 @@ public class GameViewManager {
 	
 	private Stage menuStage;
 	private ImageView ship;
+	private ViewManager viewManager;
 	
 	private boolean isLeftKeyPressed;
 	private boolean isRightKeyPressed;
@@ -63,9 +64,10 @@ public class GameViewManager {
 	private int meteor_number = 3;
 	private int meteor_speed = 4;
 	
-	private final static int STAR_RADIUS = 12;
-	private final static int METEOR_RADIUS = 20;
-	private final static int SHIP_RADIUS = 27;
+	private final static int STAR_RADIUS = 12; //star width-height = 31x30 pixel
+	private final static int METEOR_RADIUS = 20; // meteor width height = 45x40 pixel
+	private final static int SHIP_RADIUS = 27; //ship width-Height 99x75 pixel
+	
 	
 	public GameViewManager() {
 		initializeStage();
@@ -83,22 +85,30 @@ public class GameViewManager {
 		
 	}
 	
+<<<<<<< HEAD
+	
 	public void createNewGame(Stage menuStage, SHIP choosenShip) {
+||||||| merged common ancestors
+	public void createNewGame(Stage menuStage, SHIP choosenShip) {
+=======
+	public void createNewGame(Stage menuStage, SHIP choosenShip, ViewManager viewManager) {
+>>>>>>> b4460accb094c5afa28ad3846c98f91e254aa13d
 		this.menuStage = menuStage;
+		this.viewManager = viewManager;
 		this.menuStage.hide();
 		createBackground();
 		createShip(choosenShip);
-		createGameLoop();
+		createGameLoop(choosenShip);
 		createGameElements(choosenShip);
 		gameStage.show();
 	}
 	
-	private void createGameLoop() {
+	private void createGameLoop(SHIP choosenship) {
 		gameTimer = new AnimationTimer() {
 			
 			@Override
 			public void handle(long now) {
-				moveShip();
+				moveShip(choosenship);
 				moveGameElement();
 				checkIfElementsAreBehindTheShipAndRelocate();
 				checkIfElementCollide();
@@ -145,7 +155,7 @@ public class GameViewManager {
 
 	
 	private void createGameElements(SHIP choosenShip) {
-		playerLife = 2;
+		playerLife = choosenShip.getHp();
 		star = new ImageView(GOLDSTAR_PATH);
 		setNewElementPosition(star);
 		gamePane.getChildren().add(star);
@@ -155,10 +165,10 @@ public class GameViewManager {
 		pointsInfoLebel.setLayoutY(20);
 		gamePane.getChildren().add(pointsInfoLebel);
 		
-		playerLifes = new ImageView[3];
+		playerLifes = new ImageView[choosenShip.getHp()+1];
 		for (int i = 0; i < playerLifes.length; i++) {
 			playerLifes[i] = new ImageView(choosenShip.getUrlLife());
-			playerLifes[i].setLayoutX(450 + (i * 50));
+			playerLifes[i].setLayoutX(550 - (i * 50));
 			playerLifes[i].setLayoutY(80);
 			gamePane.getChildren().add(playerLifes[i]);
 		}
@@ -226,15 +236,22 @@ public class GameViewManager {
 	
 
 	
+<<<<<<< HEAD
 	private void moveShip() {
+
+||||||| merged common ancestors
+	private void moveShip() {
+=======
+	private void moveShip(SHIP choosenship) {
+>>>>>>> b4460accb094c5afa28ad3846c98f91e254aa13d
 		if(isUpKeyPressed && !isDownKeyPressed) {
 			if(ship.getLayoutY() > 50) {
-				ship.setLayoutY(ship.getLayoutY() -3);
+				ship.setLayoutY(ship.getLayoutY() - ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		if(!isUpKeyPressed && isDownKeyPressed) {
 			if(ship.getLayoutY() < 800 -75) {
-				ship.setLayoutY(ship.getLayoutY() +3);
+				ship.setLayoutY(ship.getLayoutY() + ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		
@@ -242,14 +259,14 @@ public class GameViewManager {
 			if(angle > -30) angle -=5;
 			ship.setRotate(angle);
 			if(ship.getLayoutX() > 0) {
-				ship.setLayoutX(ship.getLayoutX() - 3);
+				ship.setLayoutX(ship.getLayoutX() - ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		if(isRightKeyPressed && !isLeftKeyPressed) {
 			if(angle < 30) angle +=5;
 			ship.setRotate(angle);
 			if(ship.getLayoutX() <  500) {
-				ship.setLayoutX(ship.getLayoutX() + 3);
+				ship.setLayoutX(ship.getLayoutX() + ( 1 * choosenship.getShipSpeedFactor()));
 			}
 		}
 		if(!isRightKeyPressed && !isLeftKeyPressed) {
@@ -270,6 +287,7 @@ public class GameViewManager {
 		}
 	
 	}
+	
 	private void createBackground() {
 		anchorPane1 = new AnchorPane();
 		anchorPane2 = new AnchorPane();
@@ -301,19 +319,19 @@ public class GameViewManager {
 		anchorPane4.setLayoutY(anchorPane4.getLayoutY()+0.5);
 		if(anchorPane1.getLayoutY()>=800) {
 			meteor_speed +=1;
-			anchorPane1.setLayoutY(-5600);
+			anchorPane1.setLayoutY(-4000);
 		}
 		if(anchorPane2.getLayoutY()>=800) {
 			meteor_speed +=2;	
-			anchorPane2.setLayoutY(-5600);
+			anchorPane2.setLayoutY(-4000);
 		}
 		if(anchorPane3.getLayoutY()>=800) {
 			meteor_speed +=2;
-			anchorPane3.setLayoutY(-5600);
+			anchorPane3.setLayoutY(-4000);
 		}
 		if(anchorPane4.getLayoutY()>=800)
 			meteor_speed +=2;
-			anchorPane4.setLayoutY(-5600);
+			anchorPane4.setLayoutY(-4000);
 	}
 	
 	private void checkIfElementCollide() {
@@ -348,6 +366,7 @@ public class GameViewManager {
 		if(playerLife < 0) {
 			gameStage.close();
 			gameTimer.stop();
+			viewManager.setHighScore(points);
 			menuStage.show();
 		}
 	}

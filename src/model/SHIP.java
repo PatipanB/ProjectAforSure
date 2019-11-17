@@ -1,16 +1,20 @@
 package model;
 
-public enum SHIP {
+public abstract class SHIP {
 
-	BLUE("view/resources/shipchooser/blue_ship.png", "view/resources/shipchooser/playerLife1_blue.png"),
-	GREEN("view/resources/shipchooser/green_ship.png", "view/resources/shipchooser/playerLife1_green.png"),
-	ORANGE("view/resources/shipchooser/orange_ship.png", "view/resources/shipchooser/playerLife1_orange.png"),
-	RED("view/resources/shipchooser/red_ship.png", "view/resources/shipchooser/playerLife1_red.png");
+	protected String urlShip;
+	protected String urlLife;
 	
+<<<<<<< HEAD
+	private String urlShip; 
+	private String urlLife;
+||||||| merged common ancestors
 	private String urlShip;
 	private String urlLife;
+=======
+>>>>>>> b4460accb094c5afa28ad3846c98f91e254aa13d
 	
-	private SHIP(String urlShip, String urlLife ) {
+	protected SHIP(String urlShip, String urlLife ) {
 		this.urlShip = urlShip;
 		this.urlLife = urlLife;
 	}
@@ -21,4 +25,8 @@ public enum SHIP {
 	public String getUrlLife() {
 		return urlLife;
 	}
+	
+	public abstract int getHp();
+	public abstract int getShipSpeedFactor();
+	public abstract String getShipInfo();
 }

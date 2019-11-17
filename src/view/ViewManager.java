@@ -2,10 +2,8 @@ package view;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
-import com.sun.scenario.effect.AbstractShadow.ShadowMode;
-import com.sun.scenario.effect.DropShadow;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -23,6 +21,10 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import model.BlueShip;
+import model.GreenShip;
+import model.OrangeShip;
+import model.RedShip;
 import model.InfoLabel;
 import model.SHIP;
 import model.ShipPicker;
@@ -39,6 +41,7 @@ public class ViewManager {
 	
 	private final static int MENU_BUTTON_START_X = 100;
 	private final static int MENU_BUTTON_START_Y = 150;
+	private int high_score=0;
 	
 	private SpaceInvaderSubscene creditsSubScene;
 	private SpaceInvaderSubscene helpSubscene;
@@ -48,9 +51,10 @@ public class ViewManager {
 	private SpaceInvaderSubscene sceneToHide;
 	
 	List<SpaceInvaderButton> menuButtons;
-	
+	List<SHIP> allShips = new ArrayList<SHIP>();
 	List<ShipPicker> shipsList;
 	private SHIP chosenShip;
+	private SHIP highScoreShip;
 	
 	public ViewManager() {
 		menuButtons = new ArrayList<SpaceInvaderButton>();
@@ -87,10 +91,19 @@ public class ViewManager {
 		helpSubscene = new SpaceInvaderSubscene();
 		mainPane.getChildren().add(helpSubscene);
 		
+		createScoreSubscene();
+		
+		createShipChooserSubScene();
+	}
+	private void createScoreSubscene() {
 		scoreSubscene = new SpaceInvaderSubscene();
 		mainPane.getChildren().add(scoreSubscene);
 		
-		createShipChooserSubScene();
+		InfoLabel HighScoreLabel = new InfoLabel("High Score"+Integer.toString(high_score));
+		HighScoreLabel.setLayoutX(110);
+		HighScoreLabel.setLayoutY(25);
+		
+		scoreSubscene.getPane().getChildren().add(HighScoreLabel);
 	}
 	//ShipChooserScene
 	private void createShipChooserSubScene() {
@@ -109,9 +122,13 @@ public class ViewManager {
 	private HBox createShipToChoose() {
 		HBox hBox = new HBox();
 		hBox.setSpacing(10);
+		allShips.add(new BlueShip());
+		allShips.add(new GreenShip());
+		allShips.add(new OrangeShip());
+		allShips.add(new RedShip());
 		shipsList = new ArrayList<ShipPicker>();
 		
-		for(SHIP ship: SHIP.values()) {
+		for(SHIP ship: allShips) {
 			ShipPicker shipToPick = new ShipPicker(ship);
 			shipsList.add(shipToPick);
 			
@@ -135,6 +152,7 @@ public class ViewManager {
 	
 	//create start button
 	private SpaceInvaderButton createButtonToStart() {
+		ViewManager viewmanager = this;
 		SpaceInvaderButton startButton = new SpaceInvaderButton("START");
 		startButton.setLayoutX(350);
 		startButton.setLayoutY(300);
@@ -144,7 +162,7 @@ public class ViewManager {
 			public void handle(ActionEvent event) {
 				if(chosenShip != null) {
 					GameViewManager gameManager = new GameViewManager();
-							gameManager.createNewGame(mainStage,chosenShip);
+							gameManager.createNewGame(mainStage,chosenShip,viewmanager);
 				}
 				
 			}
@@ -232,5 +250,13 @@ public class ViewManager {
 		});
 		
 		mainPane.getChildren().add(logo);
+	}
+	
+	public void setHighScore(int highScore) {
+		if(highScore>high_score) {
+			high_score = highScore;
+			mainPane.getChildren().remove(scoreSubscene);
+			createScoreSubscene();
+		}
 	}
 }

@@ -2,15 +2,6 @@ package model;
 
 import java.io.FileInputStream;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.Rectangle;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.scenario.effect.DropShadow;
-import com.sun.scenario.effect.Effect;
-import com.sun.scenario.effect.FilterContext;
-import com.sun.scenario.effect.ImageData;
-import com.sun.scenario.effect.Effect.AccelType;
-
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
