@@ -29,6 +29,7 @@ public class GameViewManager {
 	
 	private Stage menuStage;
 	private ImageView ship;
+	private ViewManager viewManager;
 	
 	private boolean isLeftKeyPressed;
 	private boolean isRightKeyPressed;
@@ -83,8 +84,9 @@ public class GameViewManager {
 		
 	}
 	
-	public void createNewGame(Stage menuStage, SHIP choosenShip) {
+	public void createNewGame(Stage menuStage, SHIP choosenShip, ViewManager viewManager) {
 		this.menuStage = menuStage;
+		this.viewManager = viewManager;
 		this.menuStage.hide();
 		createBackground();
 		createShip(choosenShip);
@@ -348,6 +350,7 @@ public class GameViewManager {
 		if(playerLife < 0) {
 			gameStage.close();
 			gameTimer.stop();
+			viewManager.setHighScore(points);
 			menuStage.show();
 		}
 	}
