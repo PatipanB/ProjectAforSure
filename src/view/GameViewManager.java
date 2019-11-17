@@ -85,14 +85,9 @@ public class GameViewManager {
 		
 	}
 	
-<<<<<<< HEAD
-	
-	public void createNewGame(Stage menuStage, SHIP choosenShip) {
-||||||| merged common ancestors
-	public void createNewGame(Stage menuStage, SHIP choosenShip) {
-=======
+
 	public void createNewGame(Stage menuStage, SHIP choosenShip, ViewManager viewManager) {
->>>>>>> b4460accb094c5afa28ad3846c98f91e254aa13d
+
 		this.menuStage = menuStage;
 		this.viewManager = viewManager;
 		this.menuStage.hide();
@@ -236,14 +231,8 @@ public class GameViewManager {
 	
 
 	
-<<<<<<< HEAD
-	private void moveShip() {
 
-||||||| merged common ancestors
-	private void moveShip() {
-=======
 	private void moveShip(SHIP choosenship) {
->>>>>>> b4460accb094c5afa28ad3846c98f91e254aa13d
 		if(isUpKeyPressed && !isDownKeyPressed) {
 			if(ship.getLayoutY() > 50) {
 				ship.setLayoutY(ship.getLayoutY() - ( 1 * choosenship.getShipSpeedFactor()));
