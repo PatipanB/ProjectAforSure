@@ -22,6 +22,6 @@ public class BlueShip extends SHIP {
 	@Override
 	public String getShipInfo() {
 		// TODO Auto-generated method stub
-		return "Balanced";
+		return "Balanced\n ";
 	}
 }

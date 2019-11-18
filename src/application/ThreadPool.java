@@ -1,9 +1,14 @@
 package application;
 
-public class ThreadPool {
+import java.util.List;
 
-	public ThreadPool() {
-		// TODO Auto-generated constructor stub
+public class ThreadPool extends ThreadGroup {
+
+	private boolean alive;
+	private List<Runnable> songList;
+	
+	public ThreadPool(int numThread) {
+		super("ThreadPool");
 	}
 
 }
