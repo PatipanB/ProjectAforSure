@@ -1,6 +1,7 @@
 package view;
 
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +11,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +22,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.BlueShip;
 import model.GreenShip;
@@ -39,6 +42,7 @@ public class ViewManager {
 	private Scene mainScene;
 	private Stage mainStage;
 	
+	private final String FONT_PATH = "src/model/resources/moonhouse.ttf";
 	private final static int MENU_BUTTON_START_X = 100;
 	private final static int MENU_BUTTON_START_Y = 150;
 	private int high_score=0;
@@ -53,7 +57,7 @@ public class ViewManager {
 	List<SpaceInvaderButton> menuButtons;
 	List<SHIP> allShips = new ArrayList<SHIP>();
 	List<ShipPicker> shipsList;
-	private SHIP chosenShip;
+	private SHIP chosenShip = new BlueShip();
 	private SHIP highScoreShip;
 	
 	public ViewManager() {
@@ -99,11 +103,28 @@ public class ViewManager {
 		scoreSubscene = new SpaceInvaderSubscene();
 		mainPane.getChildren().add(scoreSubscene);
 		
-		InfoLabel HighScoreLabel = new InfoLabel("High Score"+Integer.toString(high_score));
+		InfoLabel HighScoreLabel = new InfoLabel("High Score");
 		HighScoreLabel.setLayoutX(110);
 		HighScoreLabel.setLayoutY(25);
 		
+		Label numberHighScore = new Label(Integer.toString(high_score));
+		try {
+			numberHighScore.setFont(Font.loadFont(new FileInputStream(FONT_PATH), 120));
+		} catch (Exception e) {
+			numberHighScore.setFont(Font.font("Verdana", 120));
+		}
+		
+		numberHighScore.setLayoutX(150);
+		numberHighScore.setLayoutY(200);
+		
+		ImageView ship = new ImageView(chosenShip.getUrl());
+		
+		ship.setLayoutX(350);
+		ship.setLayoutY(200);
+		
 		scoreSubscene.getPane().getChildren().add(HighScoreLabel);
+		scoreSubscene.getPane().getChildren().add(numberHighScore);
+		scoreSubscene.getPane().getChildren().add(ship);
 	}
 	//ShipChooserScene
 	private void createShipChooserSubScene() {

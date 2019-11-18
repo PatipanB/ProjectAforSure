@@ -22,7 +22,7 @@ public class OrangeShip extends SHIP {
 	@Override
 	public String getShipInfo() {
 		// TODO Auto-generated method stub
-		return "Nothing good";
+		return "Hard mode\n ";
 	}
 
 }
