@@ -285,10 +285,10 @@ public class GameViewManager {
 		ImageView backgrouImage3 = new ImageView(BACKGROUND_PATH3);
 		ImageView backgrouImage4 = new ImageView(BACKGROUND_PATH4);
 
-		anchorPane1.getChildren().add(backgrouImage4);
-		anchorPane2.getChildren().add(backgrouImage3);
-		anchorPane3.getChildren().add(backgrouImage2);
-		anchorPane4.getChildren().add(backgrouImage1);
+		anchorPane1.getChildren().add(backgrouImage1);
+		anchorPane2.getChildren().add(backgrouImage2);
+		anchorPane3.getChildren().add(backgrouImage3);
+		anchorPane4.getChildren().add(backgrouImage4);
 
 		anchorPane1.setLayoutY(-800);
 		anchorPane2.setLayoutY(-2400);
