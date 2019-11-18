@@ -2,13 +2,10 @@ package model;
 
 public abstract class SHIP {
 
-	protected String urlShip;
-	protected String urlLife;
-
 	private String urlShip;
 	private String urlLife;
 
-	private SHIP(String urlShip, String urlLife ) {
+	protected SHIP(String urlShip, String urlLife ) {
 		this.urlShip = urlShip;
 		this.urlLife = urlLife;
 	}
