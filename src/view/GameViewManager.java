@@ -2,27 +2,33 @@ package view;
 
 
 
+import java.io.FileInputStream;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.InfoLabel;
 import model.PointInfoLebel;
 import model.SHIP;
+import model.SpaceInvaderSubscene;
 
 public class GameViewManager {
 
  private AnchorPane gamePane;
  private Scene gameScene;
  private Stage gameStage;
+ private SpaceInvaderSubscene deadSubscene;
 
  private static final int GAME_WIDTH = 600;
  private static final int GAME_HEIGHT = 800;
@@ -108,9 +114,30 @@ public class GameViewManager {
     moveBackground();
    }
   };
-
   gameTimer.start();
  }
+
+ private void createDeadSubScene() {
+		deadSubscene = new SpaceInvaderSubscene();
+		gamePane.getChildren().add(deadSubscene);
+		
+		InfoLabel ScoreLabel = new InfoLabel("Scores");
+		ScoreLabel.setLayoutX(110);
+		ScoreLabel.setLayoutY(25);
+		
+		if(points >= viewManager.getHigh_score()) {
+			viewManager.setHighScore(points);
+		}
+		Label numberHighScore = new Label(Integer.toString(viewManager.getHigh_score()));
+		try {
+			numberHighScore.setFont(Font.loadFont(new FileInputStream(viewManager.getFONT_PATH()), 120));
+		} catch (Exception e) {
+			numberHighScore.setFont(Font.font("Verdana", 120));
+		}
+		
+		numberHighScore.setLayoutX(150);
+		numberHighScore.setLayoutY(200);
+	}
 
  private void createKeyListeners() {
 
@@ -350,7 +377,7 @@ public class GameViewManager {
 	  gamePane.getChildren().remove(playerLifes[playerLife]);
 	  playerLife--;
 	  if(playerLife < 0) {
-	   gameStage.close();
+	   gameStage.close();;
 	   gameTimer.stop();
 	   viewManager.setHighScore(points);
 	   menuStage.show();

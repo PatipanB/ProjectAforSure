@@ -2,10 +2,10 @@
 
 
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -22,6 +22,8 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.BlueShip;
@@ -60,6 +62,8 @@ public class ViewManager {
 	private SHIP chosenShip = new BlueShip();
 	private SHIP highScoreShip;
 	
+	private MediaPlayer mediaPlayer;
+	
 	public ViewManager() {
 		menuButtons = new ArrayList<SpaceInvaderButton>();
 		mainPane = new AnchorPane();
@@ -71,6 +75,7 @@ public class ViewManager {
 		createBackground();
 		createLogo();
 		createSubScene();
+		createBackgroundMusic();
 		
 		SpaceInvaderSubscene subscene = new SpaceInvaderSubscene();
 		mainPane.getChildren().add(subscene);
@@ -246,6 +251,14 @@ public class ViewManager {
 	
 	}
 	
+	private void createBackgroundMusic() {
+		String musicPath = ClassLoader.getSystemResource("audio/resources/Vidian_BlackBird.mp3").toString();
+		mediaPlayer = new MediaPlayer(new Media(musicPath));
+		
+		mediaPlayer.play();
+		mediaPlayer.setVolume(5);
+	}
+	
 	private void createLogo() {
 		String image_path = ClassLoader.getSystemResource("view/resources/Title.png").toString();
 		ImageView logo = new ImageView(new Image(image_path));
@@ -277,5 +290,11 @@ public class ViewManager {
 			mainPane.getChildren().remove(scoreSubscene);
 			createScoreSubscene();
 		}
+	}
+	public int getHigh_score() {
+		return high_score;
+	}
+	public String getFONT_PATH() {
+		return FONT_PATH;
 	}
 }

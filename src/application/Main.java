@@ -21,7 +21,6 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		ThreadPool pool = new ThreadPool(2);
 		launch(args);
 	}
 }
